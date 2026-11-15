@@ -1,0 +1,225 @@
+--------id--------
+count    699960.000000
+mean     349979.500000
+std      202061.191549
+min           0.000000
+25%      174989.750000
+50%      349979.500000
+75%      524969.250000
+max      699959.000000
+
+--------amount_usd--------
+count    699960.000000
+mean         79.893068
+std         205.173538
+min           1.000000
+25%          15.810000
+50%          27.250000
+75%          43.110000
+max        6872.690000
+
+--------hours_since_last_txn--------
+count    699960.000000
+mean          6.633734
+std           6.290133
+min           0.010000
+25%           2.110000
+50%           4.730000
+75%           9.190000
+max          51.980000
+
+--------txn_count_last_24h--------
+txn_count_last_24h
+3     178367
+2     170757
+4     131869
+1      92705
+5      69701
+6      26488
+0      18462
+7       8907
+8       2252
+9        378
+10        65
+11         9
+
+--------distance_from_home_km--------
+count    699960.000000
+mean         13.587575
+std          11.617325
+min           0.000000
+25%           4.430000
+50%          10.220000
+75%          19.750000
+max          57.930000
+
+--------card_age_months--------
+count    699960.000000
+mean         46.862982
+std           5.579190
+min          25.000000
+25%          43.000000
+50%          47.000000
+75%          51.000000
+max          73.000000
+
+--------customer_age--------
+count    699960.000000
+mean         51.430286
+std          17.899150
+min          18.000000
+25%          38.000000
+50%          52.000000
+75%          66.000000
+max          81.000000
+
+--------account_balance_usd--------
+count    699960.000000
+mean       2064.998070
+std        3400.132922
+min          58.250000
+25%         834.120000
+50%        1382.740000
+75%        2517.020000
+max       99701.390000
+
+--------cvv_retry_count--------
+cvv_retry_count
+0    642088
+1     55942
+2      1905
+3        25
+
+--------velocity_score--------
+count    699960.000000
+mean         18.929445
+std          10.864385
+min           0.000000
+25%          11.400000
+50%          18.600000
+75%          26.000000
+max          72.900000
+
+--------time_of_day_hour--------
+count    699960.000000
+mean         11.761915
+std           6.869164
+min           0.000000
+25%           6.000000
+50%          12.000000
+75%          18.000000
+max          23.000000
+
+--------day_of_week--------
+day_of_week
+4    102508
+1    102288
+2    101467
+6    100617
+0    100548
+3     97261
+5     95271
+
+--------merchant_risk_score--------
+count    699960.000000
+mean         35.217648
+std          12.628361
+min           0.000000
+25%          26.400000
+50%          34.200000
+75%          42.700000
+max         100.000000
+
+--------prior_disputes--------
+prior_disputes
+0    598396
+1     96365
+2      5032
+3       165
+4         2
+
+--------merchant_category--------
+merchant_category
+Online Retail      155097
+Groceries          142578
+Restaurants        101360
+Fuel                59880
+Electronics         48693
+Streaming           47196
+Utilities           42027
+Healthcare          35889
+Travel              28715
+Gaming              23784
+Gift Cards           9456
+Crypto Exchange      5285
+
+--------card_type--------
+card_type
+Visa          345001
+Mastercard    254857
+Amex           45797
+RuPay          37070
+Discover       17235
+
+--------auth_method--------
+auth_method
+3D Secure            210036
+OTP                  175178
+PIN                  154020
+Biometric             93666
+No Authentication     67060
+
+--------channel--------
+channel
+Online         273939
+POS            206465
+Contactless    105620
+In-App          83716
+ATM             30220
+
+--------device_type--------
+device_type
+Android Phone    237454
+iPhone           164691
+POS Terminal     113237
+Windows PC        80934
+Mac               33973
+Tablet            27688
+Smart Watch       21106
+ATM Machine       20877
+
+--------is_foreign_transaction--------
+is_foreign_transaction
+False    687862
+True      12098
+
+--------is_new_merchant--------
+is_new_merchant
+False    593240
+True     106720
+
+--------used_vpn--------
+used_vpn
+False    676295
+True      23665
+
+--------ip_country_mismatch--------
+ip_country_mismatch
+False    688648
+True      11312
+
+--------billing_shipping_mismatch--------
+billing_shipping_mismatch
+False    690906
+True       9054
+
+--------is_ai_generated_scam_attempt--------
+is_ai_generated_scam_attempt
+False    697661
+True       2299
+
+--------is_fraud--------
+is_fraud
+0.0    688271
+1.0     11689
+
