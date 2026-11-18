@@ -1,0 +1,204 @@
+{
+  "n_rows": 100000,
+  "n_cols": 26,
+  "n_features": 24,
+  "column_types": {
+    "num": [
+      "amount_usd",
+      "hours_since_last_txn",
+      "txn_count_last_24h",
+      "distance_from_home_km",
+      "card_age_months",
+      "customer_age",
+      "account_balance_usd",
+      "cvv_retry_count",
+      "velocity_score",
+      "time_of_day_hour",
+      "day_of_week",
+      "merchant_risk_score",
+      "prior_disputes"
+    ],
+    "cat": [
+      "merchant_category",
+      "card_type",
+      "auth_method",
+      "channel",
+      "device_type"
+    ],
+    "bool": [
+      "is_foreign_transaction",
+      "is_new_merchant",
+      "used_vpn",
+      "ip_country_mismatch",
+      "billing_shipping_mismatch",
+      "is_ai_generated_scam_attempt"
+    ]
+  },
+  "dtypes": {
+    "id": "int64",
+    "amount_usd": "float64",
+    "hours_since_last_txn": "float64",
+    "txn_count_last_24h": "int64",
+    "distance_from_home_km": "float64",
+    "card_age_months": "int64",
+    "customer_age": "int64",
+    "account_balance_usd": "float64",
+    "cvv_retry_count": "int64",
+    "velocity_score": "float64",
+    "time_of_day_hour": "int64",
+    "day_of_week": "int64",
+    "merchant_risk_score": "float64",
+    "prior_disputes": "int64",
+    "merchant_category": "str",
+    "card_type": "str",
+    "auth_method": "str",
+    "channel": "str",
+    "device_type": "str",
+    "is_foreign_transaction": "int8",
+    "is_new_merchant": "int8",
+    "used_vpn": "int8",
+    "ip_country_mismatch": "int8",
+    "billing_shipping_mismatch": "int8",
+    "is_ai_generated_scam_attempt": "int8",
+    "is_fraud": "int64"
+  },
+  "missing": {},
+  "duplicate_feature_rows": 0,
+  "duplicate_ids": 0,
+  "duplicate_rows_with_target": 0,
+  "conflicting_label_groups": 0,
+  "class_counts": {
+    "0": 98330,
+    "1": 1670
+  },
+  "positive_rate": 0.0167,
+  "imbalance_neg_per_pos": 58.880239520958085,
+  "numeric_ranges": {
+    "amount_usd": {
+      "min": 1.0,
+      "max": 6872.69,
+      "n_negative": 0,
+      "n_unique": 7552
+    },
+    "hours_since_last_txn": {
+      "min": 0.01,
+      "max": 51.84,
+      "n_negative": 0,
+      "n_unique": 2837
+    },
+    "txn_count_last_24h": {
+      "min": 0.0,
+      "max": 11.0,
+      "n_negative": 0,
+      "n_unique": 12
+    },
+    "distance_from_home_km": {
+      "min": 0.0,
+      "max": 57.35,
+      "n_negative": 0,
+      "n_unique": 3722
+    },
+    "card_age_months": {
+      "min": 25.0,
+      "max": 73.0,
+      "n_negative": 0,
+      "n_unique": 48
+    },
+    "customer_age": {
+      "min": 18.0,
+      "max": 81.0,
+      "n_negative": 0,
+      "n_unique": 64
+    },
+    "account_balance_usd": {
+      "min": 58.61,
+      "max": 99701.39,
+      "n_negative": 0,
+      "n_unique": 20297
+    },
+    "cvv_retry_count": {
+      "min": 0.0,
+      "max": 3.0,
+      "n_negative": 0,
+      "n_unique": 4
+    },
+    "velocity_score": {
+      "min": 0.0,
+      "max": 71.9,
+      "n_negative": 0,
+      "n_unique": 609
+    },
+    "time_of_day_hour": {
+      "min": 0.0,
+      "max": 23.0,
+      "n_negative": 0,
+      "n_unique": 24
+    },
+    "day_of_week": {
+      "min": 0.0,
+      "max": 6.0,
+      "n_negative": 0,
+      "n_unique": 7
+    },
+    "merchant_risk_score": {
+      "min": 0.0,
+      "max": 100.0,
+      "n_negative": 0,
+      "n_unique": 866
+    },
+    "prior_disputes": {
+      "min": 0.0,
+      "max": 4.0,
+      "n_negative": 0,
+      "n_unique": 5
+    }
+  },
+  "hour_out_of_0_23": 0,
+  "categorical_levels": {
+    "merchant_category": [
+      "crypto_exchange",
+      "electronics",
+      "fuel",
+      "gaming",
+      "gift_cards",
+      "groceries",
+      "healthcare",
+      "online_retail",
+      "restaurants",
+      "streaming",
+      "travel",
+      "utilities"
+    ],
+    "card_type": [
+      "amex",
+      "discover",
+      "mastercard",
+      "rupay",
+      "visa"
+    ],
+    "auth_method": [
+      "3d_secure",
+      "biometric",
+      "no_authentication",
+      "otp",
+      "pin"
+    ],
+    "channel": [
+      "atm",
+      "contactless",
+      "in_app",
+      "online",
+      "pos"
+    ],
+    "device_type": [
+      "android_phone",
+      "atm_machine",
+      "iphone",
+      "mac",
+      "pos_terminal",
+      "smart_watch",
+      "tablet",
+      "windows_pc"
+    ]
+  }
+}

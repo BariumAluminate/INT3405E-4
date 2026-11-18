@@ -1,0 +1,5 @@
+feature_a,feature_b,spearman
+amount_usd,log_amount_usd,1.0
+hours_since_last_txn,log_hours_since_last_txn,1.0
+distance_from_home_km,log_distance_from_home_km,1.0
+account_balance_usd,log_account_balance_usd,1.0
