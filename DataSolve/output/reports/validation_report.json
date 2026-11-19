@@ -1,0 +1,47 @@
+{
+  "shapes": {
+    "train": [
+      80000,
+      67
+    ],
+    "validation": [
+      20000,
+      67
+    ],
+    "test": [
+      299984,
+      66
+    ]
+  },
+  "missing_values": {
+    "train": 0,
+    "validation": 0,
+    "test": 0
+  },
+  "id_overlap": {
+    "train&validation": 0,
+    "train&test": 0,
+    "validation&test": 0
+  },
+  "positive_rate": {
+    "train": 0.0167,
+    "validation": 0.0167
+  },
+  "kaggle_test_has_target": false,
+  "train_scaled_max_abs_mean": 2.3651123726153855e-08,
+  "train_scaled_max_abs_std_minus_1": 6.198883056640625e-06,
+  "checks": {
+    "same_feature_columns": true,
+    "no_missing_after_preprocessing": true,
+    "no_id_overlap": true,
+    "target_unchanged": true,
+    "stratified_ratio_ok": true,
+    "scaler_fitted_on_train_only": true,
+    "binary_cols_are_0_1": true
+  },
+  "all_passed": true,
+  "content_overlap_with_train": {
+    "validation": 0,
+    "kaggle_test": 0
+  }
+}

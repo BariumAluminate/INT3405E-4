@@ -1,0 +1,12 @@
+{
+  "test_mode": "kaggle_test",
+  "final_feature_set": "v3_no_redundant",
+  "n_encoded_features": 65,
+  "args": {
+    "sample": 100000,
+    "eval_sample": 200000,
+    "mi_sample": 100000,
+    "top_k": 20,
+    "local_test": false
+  }
+}

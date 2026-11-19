@@ -1,0 +1,17 @@
+model,group,auc_val,delta,rationale
+hgb,(baseline),0.9499242134057929,0.0,
+hgb,log_transform,0.9499242134057929,0.0,Số tiền/khoảng cách/thời gian lệch phải mạnh; log1p giúp mô hình tuyến tính.
+hgb,amount_to_balance,0.9509507883450022,0.0010265749392093237,Giao dịch chiếm tỷ trọng lớn so với số dư là dấu hiệu rút cạn tài khoản.
+hgb,amount_cents,0.9510523344646007,0.001128121058807774,Dữ liệu synthetic tái dùng giá trị gốc; phần xu/số tròn mang tín hiệu (thảo luận cộng đồng S6E11).
+hgb,hour_cyclic_night,0.9504366635385794,0.0005124501327864461,Giờ là biến vòng (23h gần 0h); gian lận thường xảy ra ban đêm.
+hgb,risk_flag_count,0.9518372996709723,0.0019130862651793867,"Tổng số cờ rủi ro (VPN, lệch IP, merchant mới...) – tương tác cộng dồn."
+hgb,velocity_x_merchant_risk,0.9486663812616808,-0.0012578321441121254,Giao dịch dồn dập TẠI merchant rủi ro cao nguy hiểm hơn từng yếu tố riêng lẻ.
+hgb,age_group_binning,0.9516786624046729,0.0017544489988799983,Binning tuổi cố định giúp mô hình tuyến tính bắt quan hệ phi tuyến.
+logreg,(baseline),0.9502308309243407,0.0,
+logreg,log_transform,0.9515241357009363,0.0012933047765956163,Số tiền/khoảng cách/thời gian lệch phải mạnh; log1p giúp mô hình tuyến tính.
+logreg,amount_to_balance,0.9504097165173365,0.00017888559299583662,Giao dịch chiếm tỷ trọng lớn so với số dư là dấu hiệu rút cạn tài khoản.
+logreg,amount_cents,0.9500059679278685,-0.0002248629964721749,Dữ liệu synthetic tái dùng giá trị gốc; phần xu/số tròn mang tín hiệu (thảo luận cộng đồng S6E11).
+logreg,hour_cyclic_night,0.949951921642325,-0.00027890928201568244,Giờ là biến vòng (23h gần 0h); gian lận thường xảy ra ban đêm.
+logreg,risk_flag_count,0.9505176568453655,0.00028682592102480253,"Tổng số cờ rủi ro (VPN, lệch IP, merchant mới...) – tương tác cộng dồn."
+logreg,velocity_x_merchant_risk,0.9502562555150048,2.5424590664124835e-05,Giao dịch dồn dập TẠI merchant rủi ro cao nguy hiểm hơn từng yếu tố riêng lẻ.
+logreg,age_group_binning,0.9503943399684918,0.0001635090441510778,Binning tuổi cố định giúp mô hình tuyến tính bắt quan hệ phi tuyến.
