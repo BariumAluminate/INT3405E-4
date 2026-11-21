@@ -2,14 +2,31 @@ import math
 import numpy as np
 
 def _sigmoid(n):
-    clipped = np.clip(n ,-500, 500)
+    clipped = np.clip(n ,-700, None) #Không chặn dưới thì bị tràn số, đã thử nghiệm
     return 1.0 / (1.0 + np.exp(-clipped))
 
+#cross entropy for biary 
 def _binary_cross_entropy(y_true, y_prob, eps=1e-15):
-    return 0
+    true_prob = np.clip(y_true, eps, 1 - eps)
+    prob = np.clip(y_prob, eps, 1 - eps)
+    return -(true_prob * np.log(prob) + (1 - true_prob) * np.log(1 - prob))
 
 def _iter_minibatches(X, y, sample_weight, batch_size, shuffle, rng):
-    return 0
+    if batch_size <= 0:
+        raise ValueError("Batch size must be greater than 0!")
+    if X.shape[0] != y.shape[0]:
+        raise ValueError("Length of X and y is different!")
+    if sample_weight is not None and sample_weight.shape[0] != X.shape[0]:
+        raise ValueError("Length of sample weight must be equal to X")
+    n_samples = X.shape[0]
+    indices = np.arange(n_samples)
+    if shuffle == True:
+        generator = rng if rng is not None else np.random.default_rng()
+        indices = generator.permutation(n_samples)
+    for start in range(0, n_samples, batch_size):
+        batch_idx = indices[start : start + batch_size]
+        weight_batch = None if sample_weight is None else sample_weight[batch_idx]
+        yield X[batch_idx], y[batch_idx], weight_batch
 
 
 class logistic_regression:
@@ -51,4 +68,4 @@ class logistic_regression:
         pass
 
 if __name__ == "__main__":
-    pass
+    print(_binary_cross_entropy(1, 0))
