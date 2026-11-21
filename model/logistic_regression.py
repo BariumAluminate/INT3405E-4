@@ -114,7 +114,10 @@ class logistic_regression:
         return _sigmoid(z)
 
     def predict(self, X, threshold=0.5):
-        pass
+        if not (0.0 <= threshold <= 1.0):
+            raise ValueError("Threshold must be in [0.0, 1.0].")
+        probs = self.predict_proba(X)
+        return (probs >= threshold).astype(np.int64)
 
     def save(self, filepath):
         pass
