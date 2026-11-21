@@ -94,8 +94,24 @@ class logistic_regression:
             self.history_.append(epoch_loss)
         return self
 
+    def _check_is_fitted(self):
+        if not (hasattr(self, "weights_") and hasattr(self, "bias_")):
+            raise RuntimeError(
+                "Model haven't been trained!"
+            )
+
     def predict_proba(self, X):
-        pass
+        self._check_is_fitted()
+        X_arr = np.asanyarray(X, dtype=self.dtype)
+        if X_arr.ndim != 2:
+            raise ValueError(f"X must be 2D, but get the shape {X_arr.shape}.")
+        if X_arr.shape[1] != self.weights_.shape[0]:
+            raise ValueError(
+                f"The number of features in X ({X_arr.shape[1]}) does not match the model."
+                f"({self.weights_.shape[0]})."
+            )
+        z = X_arr @ self.weights + self.bias
+        return _sigmoid(z)
 
     def predict(self, X, threshold=0.5):
         pass
