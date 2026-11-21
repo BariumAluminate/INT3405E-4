@@ -120,11 +120,77 @@ class logistic_regression:
         return (probs >= threshold).astype(np.int64)
 
     def save(self, filepath):
-        pass
+        """Lưu cấu hình và tham số đã học của mô hình xuống file .npz."""
+        path = Path(filepath)
+        if path.suffix != ".npz":
+            path = path.with_suffix(".npz")
+
+        has_fitted = hasattr(self, "weights_") and hasattr(self, "bias_")
+        weights = self.weights_ if has_fitted else None
+        bias = np.asarray(self.bias_, dtype=self.dtype) if has_fitted else None
+        history = (
+            np.asarray(self.history_, dtype=np.float64)
+            if hasattr(self, "history_")
+            else None
+        )
+
+        # Lưu class_weight dưới dạng object array nếu là dict hoặc None
+        class_weight_arr = np.array(self.class_weight, dtype=object)
+
+        np.savez(
+            path,
+            learning_rate=np.array(self.learning_rate, dtype=np.float64),
+            reg_lambda=np.array(self.reg_lambda, dtype=np.float64),
+            n_epochs=np.array(self.n_epochs, dtype=np.int64),
+            batch_size=np.array(self.batch_size, dtype=np.int64),
+            class_weight=class_weight_arr,
+            shuffle=np.array(self.shuffle, dtype=bool),
+            random_state=np.array(
+                -1 if self.random_state is None else self.random_state,
+                dtype=np.int64,
+            ),
+            has_random_state=np.array(self.random_state is not None, dtype=bool),
+            dtype_name=np.array(np.dtype(self.dtype).name),
+            has_fitted=np.array(has_fitted, dtype=bool),
+            weights=np.array([], dtype=self.dtype) if weights is None else weights,
+            bias=np.array([], dtype=self.dtype) if bias is None else bias,
+            history=np.array([], dtype=np.float64) if history is None else history,
+        )
+        return str(path)
 
     @classmethod
     def load(cls, filepath):
-        pass
+        """Tải mô hình từ file .npz và trả về một instance LogisticRegression."""
+        path = Path(filepath)
+        if not path.exists() and path.with_suffix(".npz").exists():
+            path = path.with_suffix(".npz")
+
+        with np.load(path, allow_pickle=True) as data:
+            has_random_state = bool(data["has_random_state"])
+            random_state = int(data["random_state"]) if has_random_state else None
+            dtype = np.dtype(str(data["dtype_name"]))
+
+            raw_cw = data["class_weight"].item()
+            class_weight = None if raw_cw is None else dict(raw_cw)
+
+            model = cls(
+                learning_rate=float(data["learning_rate"]),
+                reg_lambda=float(data["reg_lambda"]),
+                n_epochs=int(data["n_epochs"]),
+                batch_size=int(data["batch_size"]),
+                class_weight=class_weight,
+                shuffle=bool(data["shuffle"]),
+                random_state=random_state,
+                dtype=dtype,
+            )
+
+            if bool(data["has_fitted"]):
+                model.weights_ = np.asarray(data["weights"], dtype=dtype)
+                model.bias_ = dtype(data["bias"].item())
+                if data["history"].size > 0:
+                    model.history_ = data["history"].tolist()
+
+        return model
 
 if __name__ == "__main__":
     print(_binary_cross_entropy(1, 0))
