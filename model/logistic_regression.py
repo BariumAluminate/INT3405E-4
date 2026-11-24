@@ -67,11 +67,16 @@ class logistic_regression:
         X = np.asanyarray(X, dtype=self.dtype)
         y = np.asanyarray(y, dtype=self.dtype)
 
+        if X_val is not None and y_val is not None:
+            X_val = np.asanyarray(X_val, dtype=self.dtype)
+            y_val = np.asanyarray(y_val, dtype=self.dtype)
+
         _, n_features = X.shape
         sample_weight = self._compute_sample_weight(y)
         self.weights = np.zeros(n_features, dtype=self.dtype)
         self.bias = self.dtype(0.0)
         self.history_ = []
+        self.val_history_ = []
 
         for _ in range(self.n_epochs):
             for X_batch, y_batch, w_batch in _iter_minibatches(
@@ -90,12 +95,24 @@ class logistic_regression:
                 self.bias -= self.learning_rate * grad_b
             full_logits = X @ self.weights + self.bias
             full_probs = _sigmoid(full_logits)
-            epoch_loss = _binary_cross_entropy(y, full_probs, sample_weight=sample_weight)
+            epoch_loss = float(np.mean(_binary_cross_entropy(y, full_probs)))
             self.history_.append(epoch_loss)
+
+            if X_val is not None and y_val is not None:
+                val_logits = X_val @ self.weights + self.bias
+                val_probs = _sigmoid(val_logits)
+                val_loss = float(np.mean(_binary_cross_entropy(y_val, val_probs)))
+                self.val_history_.append(val_loss)
         return self
 
+    def get_history(self):
+        return self.history_
+
+    def get_val_hist(self):
+        return self.val_history_
+
     def _check_is_fitted(self):
-        if not (hasattr(self, "weights_") and hasattr(self, "bias_")):
+        if not (hasattr(self, "weights") and hasattr(self, "bias")):
             raise RuntimeError(
                 "Model haven't been trained!"
             )
@@ -105,10 +122,10 @@ class logistic_regression:
         X_arr = np.asanyarray(X, dtype=self.dtype)
         if X_arr.ndim != 2:
             raise ValueError(f"X must be 2D, but get the shape {X_arr.shape}.")
-        if X_arr.shape[1] != self.weights_.shape[0]:
+        if X_arr.shape[1] != self.weights.shape[0]:
             raise ValueError(
                 f"The number of features in X ({X_arr.shape[1]}) does not match the model."
-                f"({self.weights_.shape[0]})."
+                f"({self.weights.shape[0]})."
             )
         z = X_arr @ self.weights + self.bias
         return _sigmoid(z)
@@ -125,16 +142,20 @@ class logistic_regression:
         if path.suffix != ".npz":
             path = path.with_suffix(".npz")
 
-        has_fitted = hasattr(self, "weights_") and hasattr(self, "bias_")
-        weights = self.weights_ if has_fitted else None
-        bias = np.asarray(self.bias_, dtype=self.dtype) if has_fitted else None
+        has_fitted = hasattr(self, "weights") and hasattr(self, "bias")
+        weights = self.weights if has_fitted else None
+        bias = np.asarray(self.bias, dtype=self.dtype) if has_fitted else None
         history = (
             np.asarray(self.history_, dtype=np.float64)
             if hasattr(self, "history_")
             else None
         )
+        val_history = (
+            np.asarray(self.val_history_, dtype=np.float64)
+            if hasattr(self, "val_history_")
+            else None
+        )
 
-        # Lưu class_weight dưới dạng object array nếu là dict hoặc None
         class_weight_arr = np.array(self.class_weight, dtype=object)
 
         np.savez(
@@ -155,12 +176,13 @@ class logistic_regression:
             weights=np.array([], dtype=self.dtype) if weights is None else weights,
             bias=np.array([], dtype=self.dtype) if bias is None else bias,
             history=np.array([], dtype=np.float64) if history is None else history,
+            val_history=np.array([], dtype=np.float64) if val_history is None else val_history,
         )
         return str(path)
 
     @classmethod
     def load(cls, filepath):
-        """Tải mô hình từ file .npz và trả về một instance LogisticRegression."""
+        """Tải mô hình từ file .npz và trả về một instance logistic_regression."""
         path = Path(filepath)
         if not path.exists() and path.with_suffix(".npz").exists():
             path = path.with_suffix(".npz")
@@ -185,12 +207,13 @@ class logistic_regression:
             )
 
             if bool(data["has_fitted"]):
-                model.weights_ = np.asarray(data["weights"], dtype=dtype)
-                model.bias_ = dtype(data["bias"].item())
-                if data["history"].size > 0:
+                model.weights = np.asarray(data["weights"], dtype=dtype)
+                model.bias = dtype(data["bias"].item())
+                if "history" in data and data["history"].size > 0:
                     model.history_ = data["history"].tolist()
+                if "val_history" in data and data["val_history"].size > 0:
+                    model.val_history_ = data["val_history"].tolist()
 
         return model
-
 if __name__ == "__main__":
     print(_binary_cross_entropy(1, 0))
