@@ -351,7 +351,10 @@ submission = pd.DataFrame({
     TARGET: test_probs,
 })
 
-submission_path = MODEL_DIR / "submission.csv"
+RESULT_DIR = ROOT / "decision_tree_result"
+RESULT_DIR.mkdir(parents=True, exist_ok=True)
+
+submission_path = RESULT_DIR / "submission.csv"
 submission.to_csv(submission_path, index=False)
 
 print("\n===== SUBMISSION COMPLETED =====")
