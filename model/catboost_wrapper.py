@@ -22,6 +22,7 @@ class catboostWrapper:
             l2_leaf_reg=l2_leaf_reg,
             thread_count=thread_count,
             random_seed=random_seed,
+            use_best_model=True
         )
 
     def fit(self, X, y=None, eval_set=None, early_stopping_rounds=100, verbose=200):
