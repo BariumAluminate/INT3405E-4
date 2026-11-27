@@ -99,12 +99,13 @@ print("Scale pos weight:", scale_pos_weight)
 
 
 params = {
-    "n_estimators": 1000,
-    "max_depth": 6,
-    "learning_rate": 0.05,
+    "n_estimators": 1500,
+    "max_depth": 4,
+    "learning_rate": 0.03,
     "subsample": 0.8,
     "colsample_bytree": 0.8,
-    "min_child_weight": 5,
+    "min_child_weight": 20,
+    "gamma": 0,
     "reg_lambda": 1.0,
     "scale_pos_weight": scale_pos_weight,
     "objective": "binary:logistic",
